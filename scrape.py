@@ -3,7 +3,7 @@ import requests, csv
 
 source = requests.get('http://coreyms.com').text
 
-csv_file = opne('scrape_csv.csv','w')
+csv_file = open('scrape_csv.csv','w')
 csv_writer = csv.writer(csv_file)
 csv_writer.writerow(['headline','summary','youtube link'])
 
@@ -14,7 +14,7 @@ for article in soup.find_all('article'):
     summary = article.find('div', class_='entry-content').p.text
     print(summary)
     try:
-        vid_src = article.find('iframe', class_='youtube-palyer')['src']
+        vid_src = article.find('iframe', class_='youtube-player')['src']
         vid_id = vid_src.split('/')[4]
         vid_id = vid_id.split('?')[0]
         youtbe_link = 'https://youtube.com/watch?v='+vid_id
